@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router";
 
 import Input from "./input/Input";
 import Button from "@mui/material/Button";
@@ -7,13 +8,45 @@ import { motion } from "framer-motion";
 // utils
 import colors from "../../utils/colors";
 
-const Login = ({ setLogin }) => {
+//redux
+import { connect } from "react-redux";
+import { getSnackbarActions } from "../../store/actions/snackbarActions";
+
+//apis
+import { authLogin } from "../../apis/auth/authLogin";
+
+const Login = ({ setLogin, setSnackbar }) => {
+  const navigate = useNavigate();
+
   const [email, setEmail] = React.useState();
   const [password, setPassword] = React.useState();
 
   const register = () => {
     setLogin(false);
   };
+
+  const loginHandler = async () => {
+    let res = null;
+    if (email && password) {
+      res = await authLogin(email, password);
+    }
+    console.log(res);
+    if (res?.statusCode === 200) {
+      setSnackbar(true, "Logged in Successfull", "success");
+      localStorage.setItem("token", res?.data?.token);
+      navigate("/");
+    } else {
+      let message = res?.message || "Something went wrong";
+      setSnackbar(true, message, "error");
+    }
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/");
+    }
+  }, [navigate]);
 
   return (
     <motion.div
@@ -47,6 +80,7 @@ const Login = ({ setLogin }) => {
               color: colors.white,
             },
           }}
+          onClick={loginHandler}
         >
           Login
         </Button>
@@ -70,4 +104,10 @@ const Login = ({ setLogin }) => {
   );
 };
 
-export default Login;
+const mapActionsToProps = (dispatch) => {
+  return {
+    ...getSnackbarActions(dispatch),
+  };
+};
+
+export default connect(null, mapActionsToProps)(Login);

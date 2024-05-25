@@ -8,3 +8,17 @@
     justify-content: center;
     align-items: center;
 }
+
+@mixin flex-row($alignItem, $justifyContent) {
+    display: flex;
+    align-items: $alignItem;
+    justify-content: $justifyContent;
+}
+
+//Fonts
+@mixin font($fontSize, $fontWeight, $letterSpacing, $lineHeight) {
+    font-size: $fontSize;
+    font-weight: $fontWeight;
+    letter-spacing: $letterSpacing;
+    line-height: $lineHeight;
+}

@@ -5,6 +5,7 @@ import "../styles/auth.scss";
 import Login from '../components/auth/Login';
 import Register from '../components/auth/Register';
 
+
 //components
 
 const Auth = () => {
