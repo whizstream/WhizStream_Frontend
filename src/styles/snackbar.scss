@@ -1,0 +1,15 @@
+@import './variables';
+
+.snackbar_success {
+    @include flex-row(center !important, space-between !important);
+    @include font(1.3rem !important, 300 !important, .02em !important, 1 !important);
+    color: $white  !important;
+    background-color: $green  !important;
+}
+
+.snackbar_error {
+    @include flex-row(center !important, space-between !important);
+    @include font(1.3rem !important, 300 !important, .02em !important, 1 !important);
+    color: $white !important;
+    background-color: $red !important;
+}
