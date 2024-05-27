@@ -1,6 +1,6 @@
 import React from "react";
 
-import Input from "./input/Input";
+import Input from "../input/Input";
 import Button from "@mui/material/Button";
 
 import { motion } from "framer-motion";

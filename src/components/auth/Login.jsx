@@ -1,18 +1,21 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useNavigate } from "react-router";
 
-import Input from "./input/Input";
+import Input from "../input/Input";
 import Button from "@mui/material/Button";
 import { motion } from "framer-motion";
 
 // utils
 import colors from "../../utils/colors";
 
+import googleBtn from "../../assets/btn_google.png";
+
 //redux
 import { connect } from "react-redux";
 import { getSnackbarActions } from "../../store/actions/snackbarActions";
 
 //apis
+import URL from "../../apis/url";
 import { authLogin } from "../../apis/auth/authLogin";
 
 const Login = ({ setLogin, setSnackbar }) => {
@@ -41,12 +44,9 @@ const Login = ({ setLogin, setSnackbar }) => {
     }
   };
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      navigate("/");
-    }
-  }, [navigate]);
+  const googleAuth = () => {
+    window.open(`${URL}/api/auth/google/callback`, "_self");
+  };
 
   return (
     <motion.div
@@ -84,6 +84,11 @@ const Login = ({ setLogin, setSnackbar }) => {
         >
           Login
         </Button>
+
+        <Button className="btn-auth" type="button" onClick={googleAuth}>
+          <img className="btn-auth-img" src={googleBtn} alt="google sign in" />
+        </Button>
+
         <Button
           onClick={register}
           sx={{
