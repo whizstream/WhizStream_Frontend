@@ -1,10 +1,6 @@
 import { useNavigate } from "react-router";
 import React, { useEffect } from "react";
 
-import { Button } from "@mui/material";
-
-import { logout } from "../utils/logout";
-
 //style
 import "../styles/home.scss";
 
@@ -15,9 +11,14 @@ import { connect } from "react-redux";
 import { getAuthActions } from "../store/actions/authActions";
 import URL from "../apis/url";
 
+//components
+
+import Dashboard from "../components/dashboard/Dashboard";
+import Navbar from "../components/navbar/Navbar";
+import Sidebar from "../components/sidebar/Sidebar";
+
 const Home = ({ login, userDetails }) => {
   const navigate = useNavigate();
-  const [tk, setToken] = React.useState();
 
   const setUser = async () => {
     try {
@@ -27,7 +28,6 @@ const Home = ({ login, userDetails }) => {
         const { data } = await axios.get(url, { withCredentials: true });
         if (data) {
           localStorage.setItem("token", data?.data?.token);
-          setToken(data?.data?.token);
           navigate("/");
         }
       }
@@ -50,18 +50,11 @@ const Home = ({ login, userDetails }) => {
   }, [login, navigate]);
   return (
     <div className="home">
-      <h1>Home </h1>
-      <p>Hello @{userDetails?.username}</p>
-      <Button
-        variant="contained"
-        sx={{
-          height: "35px",
-          fontSize: "15px",
-        }}
-        onClick={logout}
-      >
-        Log out
-      </Button>
+      <Navbar />
+      <div className="home__content">
+        <Sidebar />
+        <Dashboard />
+      </div>
     </div>
   );
 };

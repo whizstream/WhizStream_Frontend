@@ -14,7 +14,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 const CustomizedSnackbars = ({ setSnackbar, snackbar }, props) => {
   // const { vertical, horizontal, open } = state;
   const vertical = "bottom";
-  const horizontal = "left";
+  const horizontal = "center";
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;

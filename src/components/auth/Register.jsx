@@ -5,8 +5,11 @@ import Button from "@mui/material/Button";
 
 import { motion } from "framer-motion";
 
+import URL from "../../apis/url";
+
 // utils
 import colors from "../../utils/colors";
+import googleBtn from "../../assets/btn_google.png";
 
 const Register = ({ setLogin }) => {
   const [email, setEmail] = React.useState();
@@ -15,6 +18,10 @@ const Register = ({ setLogin }) => {
 
   const login = () => {
     setLogin(true);
+  };
+
+  const googleAuth = () => {
+    window.open(`${URL}/api/auth/google/callback`, "_self");
   };
   return (
     <motion.div
@@ -56,6 +63,9 @@ const Register = ({ setLogin }) => {
           }}
         >
           Register
+        </Button>
+        <Button className="btn-auth" type="button" onClick={googleAuth}>
+          <img className="btn-auth-img" src={googleBtn} alt="google sign in" />
         </Button>
         <Button
           onClick={login}

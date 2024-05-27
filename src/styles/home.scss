@@ -1,15 +1,12 @@
 @import "./variables";
-@import url('https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap');
 
 .home {
-     @include full-screen;
-     @include flex-center;
-     flex-direction: column;
-     font-family: "Poetsen One", sans-serif;
-     background-color: $primary;
-     color : $white;
+  @include full-screen;
+  background-color: $primary;
+  color: $white;
 
-     h1{
-          font-size: 30rem;
-     }
+  &__content {
+    display: flex;
+    height: calc(100vh - 46px);
+  }
 }
