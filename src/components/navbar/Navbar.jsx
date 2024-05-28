@@ -8,7 +8,6 @@ import Avatar from "@mui/material/Avatar";
 import { connect } from "react-redux";
 
 const Navbar = ({ userDetails }) => {
-  console.log(userDetails?.profilePic);
   return (
     <div className="navbar">
       <div className="navbar__logo">
@@ -18,7 +17,11 @@ const Navbar = ({ userDetails }) => {
         <input type="text" placeholder="Search..." />
       </div>
       <div className="navbar__profile">
-        <Avatar alt="Remy Sharp" src={userDetails?.profilePic} />
+        {userDetails?.profilePic ? (
+          <Avatar alt="Remy Sharp" src={userDetails?.profilePic} />
+        ) : (
+          <Avatar>{userDetails?.username.toUpperCase().slice(0, 1)}</Avatar>
+        )}
       </div>
     </div>
   );

@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router";
 import React, { useEffect } from "react";
+// router
+import { Routes, Route } from "react-router-dom";
 
 //style
 import "../styles/home.scss";
@@ -16,6 +18,7 @@ import URL from "../apis/url";
 import Dashboard from "../components/dashboard/Dashboard";
 import Navbar from "../components/navbar/Navbar";
 import Sidebar from "../components/sidebar/Sidebar";
+import Upload from "../components/dashboard/Upload";
 
 const Home = ({ login, userDetails }) => {
   const navigate = useNavigate();
@@ -31,9 +34,7 @@ const Home = ({ login, userDetails }) => {
           navigate("/");
         }
       }
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   };
 
   useEffect(() => {
@@ -53,7 +54,11 @@ const Home = ({ login, userDetails }) => {
       <Navbar />
       <div className="home__content">
         <Sidebar />
-        <Dashboard />
+        {/* here render dashboard or upload */}
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/upload" element={<Upload />} />
+        </Routes>
       </div>
     </div>
   );

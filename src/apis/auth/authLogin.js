@@ -2,7 +2,6 @@ import axios from "axios";
 import URL from "../url";
 
 export const authLogin = async (email, password) => {
-  console.log(email, password);
   if (email && password) {
     const data = {
       email: email,

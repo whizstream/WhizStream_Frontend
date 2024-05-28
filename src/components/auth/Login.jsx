@@ -33,7 +33,6 @@ const Login = ({ setLogin, setSnackbar }) => {
     if (email && password) {
       res = await authLogin(email, password);
     }
-    console.log(res);
     if (res?.statusCode === 200) {
       setSnackbar(true, "Logged in Successfull", "success");
       localStorage.setItem("token", res?.data?.token);
