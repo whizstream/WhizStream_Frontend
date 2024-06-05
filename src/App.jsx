@@ -9,10 +9,19 @@ import Auth from "./pages/Auth";
 import Profile from "./pages/Profile";
 import Video from "./pages/Video";
 import CustomizedSnackbars from "./components/auth/CustomizedSnackbars";
+import AnimatedCursor from "react-animated-cursor";
 
 const App = () => {
   return (
     <>
+      <AnimatedCursor
+        innerSize={10}
+        outerSize={30}
+        color="255, 46, 99"
+        outerAlpha={0.4}
+        innerScale={0.6}
+        outerScale={0}
+      />
       <Router>
         <Routes>
           <Route path="/auth" element={<Auth />} />

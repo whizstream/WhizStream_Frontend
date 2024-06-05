@@ -3,9 +3,6 @@ import React, { useEffect } from "react";
 // router
 import { Routes, Route } from "react-router-dom";
 
-//style
-import "../styles/home.scss";
-
 import axios from "axios";
 
 // redux
@@ -14,11 +11,12 @@ import { getAuthActions } from "../store/actions/authActions";
 import URL from "../apis/url";
 
 //components
-
+import CssBaseline from "@mui/material/CssBaseline";
 import Dashboard from "../components/dashboard/Dashboard";
-import Navbar from "../components/navbar/Navbar";
-import Sidebar from "../components/sidebar/Sidebar";
+import MuiNavbar from "../components/navbar/MuiNavbar";
 import Upload from "../components/dashboard/Upload";
+import { Stack } from "@mui/material";
+import MuiSidebar from "../components/sidebar/MuiSidebar";
 
 const Home = ({ login, userDetails }) => {
   const navigate = useNavigate();
@@ -50,17 +48,17 @@ const Home = ({ login, userDetails }) => {
     }
   }, [login, navigate]);
   return (
-    <div className="home">
-      <Navbar />
-      <div className="home__content">
-        <Sidebar />
-        {/* here render dashboard or upload */}
+    <Stack sx={{ display: "flex" }}>
+      <CssBaseline />
+      <MuiNavbar />
+      <Stack direction="row">
+        <MuiSidebar />
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/upload" element={<Upload />} />
         </Routes>
-      </div>
-    </div>
+      </Stack>
+    </Stack>
   );
 };
 
