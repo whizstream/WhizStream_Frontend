@@ -130,10 +130,10 @@ export default function MuiNavbar() {
       <MenuItem>
         <IconButton
           size="large"
-          aria-label="show 17 new notifications"
+          // aria-label="show  new notifications"
           color="inherit"
         >
-          <Badge badgeContent={17} color="error">
+          <Badge badgeContent={0} color="warning">
             <NotificationsIcon />
           </Badge>
         </IconButton>
@@ -195,7 +195,7 @@ export default function MuiNavbar() {
               aria-label="show 17 new notifications"
               color="inherit"
             >
-              <Badge badgeContent={17} color="error">
+              <Badge badgeContent={0} color="error">
                 <NotificationsIcon />
               </Badge>
             </IconButton>

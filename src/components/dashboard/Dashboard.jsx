@@ -2,10 +2,16 @@ import React from "react";
 
 //redux
 import { connect } from "react-redux";
-import { Stack } from "@mui/material";
+import { Button, Stack } from "@mui/material";
 
 const Dashboard = ({ userDetails }) => {
-  return <Stack></Stack>;
+  return (
+    <Stack spacing={2} direction="row" padding={10}>
+      <Button variant="text">Text</Button>
+      <Button variant="contained">Contained</Button>
+      <Button variant="outlined">Outlined</Button>
+    </Stack>
+  );
 };
 
 const mapStoreStateToProps = ({ auth, project }) => {

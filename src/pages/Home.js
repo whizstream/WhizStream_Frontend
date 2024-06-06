@@ -18,7 +18,7 @@ import Upload from "../components/dashboard/Upload";
 import { Stack } from "@mui/material";
 import MuiSidebar from "../components/sidebar/MuiSidebar";
 
-const Home = ({ login, userDetails }) => {
+const Home = ({ login, userDetails, theme, setTheme }) => {
   const navigate = useNavigate();
 
   const setUser = async () => {
@@ -32,7 +32,7 @@ const Home = ({ login, userDetails }) => {
           navigate("/");
         }
       }
-    } catch (err) {}
+    } catch (err) { }
   };
 
   useEffect(() => {
@@ -52,7 +52,7 @@ const Home = ({ login, userDetails }) => {
       <CssBaseline />
       <MuiNavbar />
       <Stack direction="row">
-        <MuiSidebar />
+        <MuiSidebar theme={theme} setTheme={setTheme} />
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/upload" element={<Upload />} />
@@ -68,7 +68,7 @@ const mapActionsToProps = (dispatch) => {
   };
 };
 
-const mapStoreStateToProps = ({ auth, project }) => {
+const mapStoreStateToProps = ({ auth }) => {
   return {
     ...auth,
   };

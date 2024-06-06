@@ -1,17 +1,18 @@
 import React from "react";
 
-import "../../styles/components/input.scss";
+import { TextField } from "@mui/material";
 
 const Input = ({ value, setValue, type, placeholder }) => {
   return (
-    <input
+    <TextField
+      variant="outlined"
+      label={placeholder}
       value={value}
       placeholder={placeholder}
       onChange={(e) => {
         setValue(e.target.value);
       }}
       type={type}
-      className="custom__input"
     />
   );
 };
