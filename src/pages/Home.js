@@ -49,7 +49,7 @@ const Home = ({ login, userDetails, theme, setTheme }) => {
     } else {
       login(token);
     }
-  }, [login, navigate]);
+  }, [login]);
   return (
     <Stack sx={{ display: "flex" }}>
       <CssBaseline />
@@ -64,7 +64,7 @@ const Home = ({ login, userDetails, theme, setTheme }) => {
         }}>
           <Routes>
             <Route path="/" element={<Dashboard />} />
-            <Route path="/upload" element={<Upload />} />
+            {/* <Route path="/upload" element={<Upload />} /> */}
             <Route path="/yourvideos" element={<YourVideos />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/saved" element={<Saved />} />
