@@ -5,6 +5,5 @@ export const authLogin = async () => {
   const res = await axios.get(`${URL}/api/auth/login/success`, {
     withCredentials: true,
   });
-  console.log(res.data);
   return res.data;
 };

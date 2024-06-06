@@ -3,10 +3,6 @@ import { useNavigate } from "react-router";
 
 import Input from "../input/Input";
 import Button from "@mui/material/Button";
-import { motion } from "framer-motion";
-
-// utils
-import colors from "../../utils/colors";
 
 import googleBtn from "../../assets/btn_google.png";
 
@@ -17,6 +13,7 @@ import { getSnackbarActions } from "../../store/actions/snackbarActions";
 //apis
 import URL from "../../apis/url";
 import { authLogin } from "../../apis/auth/authLogin";
+import { Stack, Typography } from "@mui/material";
 
 const Login = ({ setLogin, setSnackbar }) => {
   const navigate = useNavigate();
@@ -33,7 +30,6 @@ const Login = ({ setLogin, setSnackbar }) => {
     if (email && password) {
       res = await authLogin(email, password);
     }
-    console.log(res);
     if (res?.statusCode === 200) {
       setSnackbar(true, "Logged in Successfull", "success");
       localStorage.setItem("token", res?.data?.token);
@@ -49,63 +45,44 @@ const Login = ({ setLogin, setSnackbar }) => {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 0.2 }}
+    <Stack
+      spacing={2}
+      sx={{
+        padding: {
+          xs: 5,
+          sm: 7,
+          md: 10,
+          lg: 10,
+          xl: 10,
+        },
+      }}
     >
-      <p className="auth__box__right__title">Login</p>
-      <div className="auth__box__right__inputs">
-        <Input
-          type="email"
-          placeholder="Email"
-          value={email}
-          setValue={setEmail}
-        />
+      <Typography variant="h4" textAlign={"center"}>
+        Login
+      </Typography>
+      <Input
+        type="email"
+        placeholder="Email"
+        value={email}
+        setValue={setEmail}
+      />
 
-        <Input
-          type="password"
-          placeholder="Password"
-          value={password}
-          setValue={setPassword}
-        />
-        <Button
-          variant="contained"
-          sx={{
-            height: "35px",
-            backgroundColor: colors.active,
-            color: colors.primary,
-            fontSize: "15px",
-            "&:hover": {
-              color: colors.white,
-            },
-          }}
-          onClick={loginHandler}
-        >
-          Login
-        </Button>
+      <Input
+        type="password"
+        placeholder="Password"
+        value={password}
+        setValue={setPassword}
+      />
+      <Button variant="contained" onClick={loginHandler}>
+        Login
+      </Button>
 
-        <Button className="btn-auth" type="button" onClick={googleAuth}>
-          <img className="btn-auth-img" src={googleBtn} alt="google sign in" />
-        </Button>
+      <Button className="btn-auth" type="button" onClick={googleAuth}>
+        <img className="btn-auth-img" src={googleBtn} alt="google sign in" />
+      </Button>
 
-        <Button
-          onClick={register}
-          sx={{
-            height: "35px",
-            fontSize: "15px",
-            color: colors.active,
-            "&:hover": {
-              backgroundColor: "None",
-              boxShadow: "none",
-              color: colors.white,
-            },
-          }}
-        >
-          Create an account!
-        </Button>
-      </div>
-    </motion.div>
+      <Button onClick={register}>Create an account!</Button>
+    </Stack>
   );
 };
 

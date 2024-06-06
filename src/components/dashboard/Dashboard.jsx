@@ -1,14 +1,16 @@
 import React from "react";
-import "../../styles/components/dashboard.scss";
 
 //redux
 import { connect } from "react-redux";
+import { Button, Stack } from "@mui/material";
 
 const Dashboard = ({ userDetails }) => {
   return (
-    <div className="dashboard">
-      <h1>Welcome {userDetails?.username}</h1>
-    </div>
+    <Stack spacing={2} direction="row">
+      <Button variant="text">Text</Button>
+      <Button variant="contained">Contained</Button>
+      <Button variant="outlined">Outlined</Button>
+    </Stack>
   );
 };
 
