@@ -156,7 +156,7 @@ export default function MuiNavbar() {
 
   return (
     <Box sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
-      <AppBar position="fixed">
+      <AppBar position="static">
         <Toolbar>
           <IconButton
             size="large"

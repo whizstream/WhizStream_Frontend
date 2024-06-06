@@ -8,12 +8,13 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import UploadIcon from "@mui/icons-material/Upload";
 import LinearProgress from "@mui/material/LinearProgress";
 
-import "../../styles/components/upload.scss";
+// import "../../styles/components/upload.scss";
 import axios from "axios";
 
 //redux
 import { getSnackbarActions } from "../../store/actions/snackbarActions";
 import { connect } from "react-redux";
+import { Box, Container, Paper, Stack } from "@mui/material";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -54,12 +55,30 @@ const Upload = ({ setSnackbar }) => {
   };
 
   return (
-    <div className="upload">
-      <div className="upload__container">
+    <Container
+      sx={{
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Paper
+        sx={{
+          padding: {
+            xs: 5,
+            sm: 7,
+            md: 10,
+            lg: 10,
+            xl: 10,
+          },
+          textAlign: "center",
+        }}
+        elevation={3}
+      >
         <UploadIcon
           sx={{
-            fontSize: "100px",
-            color: "white",
             border: "0.2px solid #cfd3da",
             borderRadius: "100%",
             height: "200px",
@@ -73,11 +92,6 @@ const Upload = ({ setSnackbar }) => {
           role={undefined}
           variant="contained"
           tabIndex={-1}
-          sx={
-            {
-              // borderRadius: "100%",
-            }
-          }
           startIcon={<CloudUploadIcon />}
         >
           Upload file
@@ -99,8 +113,8 @@ const Upload = ({ setSnackbar }) => {
             }}
           />
         )}
-      </div>
-    </div>
+      </Paper>
+    </Container>
   );
 };
 

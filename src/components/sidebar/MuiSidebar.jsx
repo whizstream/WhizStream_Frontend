@@ -1,5 +1,8 @@
 import React from "react";
-import Box from "@mui/material/Box";
+import { useLocation } from "react-router-dom";
+
+import { Box, styled } from "@mui/material";
+
 import Drawer from "@mui/material/Drawer";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
@@ -18,12 +21,27 @@ import VideoLibraryIcon from "@mui/icons-material/VideoLibrary";
 import CollectionsIcon from "@mui/icons-material/Collections";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { Typography } from "@mui/material";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 import { logout } from "../../utils/logout";
+import { useNavigate } from "react-router-dom";
 
-const drawerWidth = 240;
+const drawerWidth = 220;
 
 const MuiSidebar = ({ theme, setTheme }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const CustomListItem = styled(ListItem)({
+    width: "95%",
+    margin: "5px",
+    borderRadius: "10px",
+    "&:hover": {
+      borderRadius: "10px",
+      backgroundColor: (theme) => theme.palette.primary.light,
+    },
+  });
+
   return (
     <Drawer
       variant="permanent"
@@ -38,18 +56,53 @@ const MuiSidebar = ({ theme, setTheme }) => {
         <List>
           {["Home", "Upload", "Saved Videos", "Your Videos", "Profile"].map(
             (text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
+              <CustomListItem
+                key={text}
+                disablePadding
+                sx={{
+                  backgroundColor:
+                    location.pathname === "/" && index === 0
+                      ? (theme) => theme.palette.primary.main
+                      : location.pathname === "/upload" && index === 1
+                      ? (theme) => theme.palette.primary.main
+                      : location.pathname === "/saved" && index === 2
+                      ? (theme) => theme.palette.primary.main
+                      : location.pathname === "/yourvideos" && index === 3
+                      ? (theme) => theme.palette.primary.main
+                      : location.pathname === "/profile" && index === 4
+                      ? (theme) => theme.palette.primary.main
+                      : "transparent",
+                  "&:hover": {
+                    borderRadius: "10px",
+                    backgroundColor: (theme) => theme.palette.primary.light,
+                  },
+                }}
+              >
+                <ListItemButton
+                  onClick={() => {
+                    if (index === 0) {
+                      navigate("/");
+                    } else if (index === 1) {
+                      navigate("/upload");
+                    } else if (index === 2) {
+                      navigate("/saved");
+                    } else if (index === 3) {
+                      navigate("/yourvideos");
+                    } else if (index === 4) {
+                      navigate("/profile");
+                    }
+                  }}
+                >
                   <ListItemIcon>
                     {index === 0 && <HomeIcon fontSize="large" />}
                     {index === 1 && <UploadIcon fontSize="large" />}
                     {index === 2 && <VideoLibraryIcon fontSize="large" />}
                     {index === 3 && <CollectionsIcon fontSize="large" />}
-                    {index === 4 && <LogoutIcon fontSize="large" />}
+                    {index === 4 && <AccountCircleIcon fontSize="large" />}
                   </ListItemIcon>
                   <ListItemText primary={text} />
                 </ListItemButton>
-              </ListItem>
+              </CustomListItem>
             )
           )}
         </List>
@@ -62,32 +115,32 @@ const MuiSidebar = ({ theme, setTheme }) => {
         <Divider />
         <List>
           {theme ? (
-            <ListItem disablePadding>
+            <CustomListItem disablePadding>
               <ListItemButton onClick={() => setTheme(false)}>
                 <ListItemIcon>
                   <DarkModeIcon fontSize="large" />
                 </ListItemIcon>
                 <ListItemText primary="Dark Mode" />
               </ListItemButton>
-            </ListItem>
+            </CustomListItem>
           ) : (
-            <ListItem disablePadding>
+            <CustomListItem disablePadding>
               <ListItemButton onClick={() => setTheme(true)}>
                 <ListItemIcon>
                   <LightModeIcon fontSize="large" />
                 </ListItemIcon>
                 <ListItemText primary="Light Mode" />
               </ListItemButton>
-            </ListItem>
+            </CustomListItem>
           )}
-          <ListItem disablePadding>
+          <CustomListItem disablePadding>
             <ListItemButton onClick={() => logout()}>
               <ListItemIcon>
                 <LogoutIcon fontSize="large" />
               </ListItemIcon>
               <ListItemText primary="Logout" />
             </ListItemButton>
-          </ListItem>
+          </CustomListItem>
         </List>
       </Box>
     </Drawer>
