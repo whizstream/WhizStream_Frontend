@@ -10,11 +10,12 @@ import LinearProgress from "@mui/material/LinearProgress";
 
 // import "../../styles/components/upload.scss";
 import axios from "axios";
+import { uploadToDB } from "../../apis/video/uploadToDB";
 
 //redux
 import { getSnackbarActions } from "../../store/actions/snackbarActions";
 import { connect } from "react-redux";
-import { Box, Container, Paper, Stack } from "@mui/material";
+import { Container, Paper, Typography } from "@mui/material";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -29,7 +30,7 @@ const VisuallyHiddenInput = styled("input")({
 });
 //style
 
-const Upload = ({ open, handleClose, setSnackbar }) => {
+const Upload = ({ setSnackbar }) => {
   const [preSignedURL, setPreSignedURL] = React.useState(null);
   const [videoID, setVideoID] = React.useState(null);
   const [progress, setProgress] = React.useState(0);
@@ -51,22 +52,25 @@ const Upload = ({ open, handleClose, setSnackbar }) => {
     });
     setProgress(100);
     setProgress(0);
-    setSnackbar(true, "Video uploaded successfully", "success");
-  };
-
-  const [open, setOpen] = React.useState(false);
-  const handleClose = () => {
-    setOpen(false);
-  };
-  const handleOpen = () => {
-    setOpen(true);
+    const uploadtodb_data = await uploadToDB({
+      VideoID: videoID,
+      token: localStorage.getItem("token"),
+    });
+    if (uploadtodb_data?.statusCode == 200) {
+      setSnackbar(true, "Video uploaded successfully", "success");
+    } else {
+      setSnackbar(true, "Failed to upload video", "error");
+    }
   };
 
   return (
-    <Backdrop
-      sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-      open={open}
-      onClick={handleClose}
+    <Container
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "calc(100vh - 64px)",
+      }}
     >
       <Paper
         sx={{
@@ -90,7 +94,14 @@ const Upload = ({ open, handleClose, setSnackbar }) => {
             padding: "10px",
           }}
         />
-        <h2>Upload Video</h2>
+        <Typography
+          variant="h4"
+          sx={{
+            margin: "20px 0",
+          }}
+        >
+          Upload Video
+        </Typography>
         <Button
           component="label"
           role={undefined}
@@ -118,7 +129,7 @@ const Upload = ({ open, handleClose, setSnackbar }) => {
           />
         )}
       </Paper>
-    </Backdrop>
+    </Container>
   );
 };
 

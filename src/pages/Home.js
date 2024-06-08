@@ -35,7 +35,7 @@ const Home = ({ login, userDetails, theme, setTheme }) => {
           navigate("/");
         }
       }
-    } catch (err) { }
+    } catch (err) {}
   };
 
   useEffect(() => {
@@ -54,17 +54,22 @@ const Home = ({ login, userDetails, theme, setTheme }) => {
     <Stack sx={{ display: "flex" }}>
       <CssBaseline />
       <MuiNavbar />
-      <Stack direction="row" sx={{
-        height: "calc(100vh - 64px)",
-      }}>
+      <Stack
+        direction="row"
+        sx={{
+          height: "calc(100vh - 64px)",
+        }}
+      >
         <MuiSidebar theme={theme} setTheme={setTheme} />
-        <Box sx={{
-          width: "100%",
-          height: "100%",
-        }}>
+        <Box
+          sx={{
+            width: "100%",
+            height: "100%",
+          }}
+        >
           <Routes>
             <Route path="/" element={<Dashboard />} />
-            {/* <Route path="/upload" element={<Upload />} /> */}
+            <Route path="/upload" element={<Upload />} />
             <Route path="/yourvideos" element={<YourVideos />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/saved" element={<Saved />} />

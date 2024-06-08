@@ -85,7 +85,7 @@ const MuiSidebar = ({ theme, setTheme }) => {
                     if (index === 0) {
                       navigate("/");
                     } else if (index === 1) {
-                      handleOpen();
+                      navigate("/upload");
                     } else if (index === 2) {
                       navigate("/saved");
                     } else if (index === 3) {
