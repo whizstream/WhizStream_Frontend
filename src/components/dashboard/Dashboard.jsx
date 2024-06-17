@@ -11,18 +11,17 @@ import Video from "../video/Video";
 // apis
 import { getVideos } from "../../apis/video/getVideos";
 
-const Dashboard = ({ userDetails }) => {
+const Dashboard = () => {
   const [loader, setLoader] = React.useState(true);
   const [videos, setVideos] = React.useState([]);
   React.useEffect(() => {
     const fetchVideos = async () => {
       const videos = await getVideos();
-      setVideos(videos.data);
+      setVideos(videos?.data);
     };
     fetchVideos();
     setLoader(false);
   }, []);
-  console.log(videos);
   return (
     <Box
       padding={2}
@@ -54,7 +53,7 @@ const Dashboard = ({ userDetails }) => {
         </Box>
       ) : (
         <Grid container spacing={2}>
-          {videos.map((video, index) => (
+          {videos?.map((video, index) => (
             <Video key={index} video={video} />
           ))}
         </Grid>

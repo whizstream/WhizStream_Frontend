@@ -3,12 +3,9 @@ import React, { useEffect } from "react";
 // router
 import { Routes, Route } from "react-router-dom";
 
-import axios from "axios";
-
 // redux
 import { connect } from "react-redux";
 import { getAuthActions } from "../store/actions/authActions";
-import URL from "../apis/url";
 
 //components
 import CssBaseline from "@mui/material/CssBaseline";
@@ -24,24 +21,6 @@ import MuiSidebar from "../components/sidebar/MuiSidebar";
 const Home = ({ login, userDetails, theme, setTheme }) => {
   const navigate = useNavigate();
 
-  const setUser = async () => {
-    try {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        const url = `${URL}/api/auth/login/success`;
-        const { data } = await axios.get(url, { withCredentials: true });
-        if (data) {
-          localStorage.setItem("token", data?.data?.token);
-          navigate("/");
-        }
-      }
-    } catch (err) {}
-  };
-
-  useEffect(() => {
-    setUser();
-  }, []);
-
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -49,7 +28,7 @@ const Home = ({ login, userDetails, theme, setTheme }) => {
     } else {
       login(token);
     }
-  }, [login]);
+  }, [login, navigate]);
   return (
     <Stack sx={{ display: "flex" }}>
       <CssBaseline />
