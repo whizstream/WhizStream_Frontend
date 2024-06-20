@@ -10,11 +10,12 @@ import LinearProgress from "@mui/material/LinearProgress";
 
 // import "../../styles/components/upload.scss";
 import axios from "axios";
+import { uploadToDB } from "../../apis/video/uploadToDB";
 
 //redux
 import { getSnackbarActions } from "../../store/actions/snackbarActions";
 import { connect } from "react-redux";
-import { Box, Container, Paper, Stack } from "@mui/material";
+import { Container, Paper, Typography } from "@mui/material";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -51,17 +52,24 @@ const Upload = ({ setSnackbar }) => {
     });
     setProgress(100);
     setProgress(0);
-    setSnackbar(true, "Video uploaded successfully", "success");
+    const uploadtodb_data = await uploadToDB({
+      VideoID: videoID,
+      token: localStorage.getItem("token"),
+    });
+    if (uploadtodb_data?.statusCode == 200) {
+      setSnackbar(true, "Video uploaded successfully", "success");
+    } else {
+      setSnackbar(true, "Failed to upload video", "error");
+    }
   };
 
   return (
     <Container
       sx={{
-        width: "100%",
-        height: "100%",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        height: "calc(100vh - 64px)",
       }}
     >
       <Paper
@@ -86,7 +94,14 @@ const Upload = ({ setSnackbar }) => {
             padding: "10px",
           }}
         />
-        <h2>Upload Video</h2>
+        <Typography
+          variant="h4"
+          sx={{
+            margin: "20px 0",
+          }}
+        >
+          Upload Video
+        </Typography>
         <Button
           component="label"
           role={undefined}
