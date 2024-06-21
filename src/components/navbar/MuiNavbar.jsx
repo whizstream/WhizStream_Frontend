@@ -115,6 +115,10 @@ export default function MuiNavbar() {
     </Menu>
   );
 
+  React.useEffect(() => {
+    setNotificationsCount(5);
+  }, []);
+
   return (
     <Box sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
       <AppBar position="static">
