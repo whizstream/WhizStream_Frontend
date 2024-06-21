@@ -1,0 +1,22 @@
+name: SSH TO EC2 and run ECHO command to print HELLO WORLD and CReate a file named hello.txt
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  ssh:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: SSH to EC2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_KEY }}
+          port: 22
+          script: |
+            echo "HELLO WORLD" > hello.txt
+            cat hello.txt
