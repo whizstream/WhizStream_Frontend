@@ -2,9 +2,12 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
 
 //style
-import "../styles/auth.scss";
 import Login from "../components/auth/Login";
 import Register from "../components/auth/Register";
+import { Box, styled } from "@mui/material";
+
+// bg
+import bg from "../assets/bg.jpg"
 
 //components
 
@@ -20,22 +23,33 @@ const Auth = () => {
     }
   }, [navigate]);
 
+  const FullScreenCenterContainer = styled(Box)({
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100vh',
+    width: '100vw',
+    backgroundImage: `url(${bg})`,
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+  });
+
   return (
-    <div className="auth">
-      <div className="auth__box">
-        <div className="auth__box__left">
-          <p>WS</p>
-          <p>Welcome to WhizStream</p>
-        </div>
-        <div className="auth__box__right">
-          {login ? (
-            <Login setLogin={setLogin} />
-          ) : (
-            <Register setLogin={setLogin} />
-          )}
-        </div>
-      </div>
-    </div>
+    <FullScreenCenterContainer>
+      <Box sx={{
+        border: "1px solid black",
+        borderRadius: "10px",
+        backgroundColor: "rgba(255,255,255, 0.8)",
+        boxShadow: "0 0 10px 0 black",
+      }}>
+        {login ? (
+          <Login setLogin={setLogin} />
+        ) : (
+          <Register setLogin={setLogin} />
+        )}
+      </Box>
+
+    </FullScreenCenterContainer>
   );
 };
 

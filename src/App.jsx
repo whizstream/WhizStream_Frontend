@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 //Router
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -6,32 +6,33 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // pages
 import Home from "./pages/Home";
 import Auth from "./pages/Auth";
-import Profile from "./pages/Profile";
-import Video from "./pages/Video";
-import CustomizedSnackbars from "./components/auth/CustomizedSnackbars";
-import AnimatedCursor from "react-animated-cursor";
+import CustomizedSnackbars from "./components/CustomizedSnackbars";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import Google from "./pages/Google";
 
 const App = () => {
+  const [theme, setTheme] = useState(true);
+  const darkTheme = createTheme({
+    palette: {
+      mode: theme ? "light" : "dark",
+    },
+  });
+
   return (
-    <>
-      <AnimatedCursor
-        innerSize={10}
-        outerSize={30}
-        color="255, 46, 99"
-        outerAlpha={0.4}
-        innerScale={0.6}
-        outerScale={0}
-      />
+    <ThemeProvider theme={darkTheme}>
       <Router>
         <Routes>
           <Route path="/auth" element={<Auth />} />
-          <Route path="/*" element={<Home />} />
-          <Route path="/video" element={<Video />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/google" element={<Google />} />
+
+          <Route
+            path="/*"
+            element={<Home theme={theme} setTheme={setTheme} />}
+          />
         </Routes>
       </Router>
       <CustomizedSnackbars />
-    </>
+    </ThemeProvider>
   );
 };
 

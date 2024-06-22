@@ -8,12 +8,14 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import UploadIcon from "@mui/icons-material/Upload";
 import LinearProgress from "@mui/material/LinearProgress";
 
-import "../../styles/components/upload.scss";
+// import "../../styles/components/upload.scss";
 import axios from "axios";
+import { uploadToDB } from "../../apis/video/uploadToDB";
 
 //redux
 import { getSnackbarActions } from "../../store/actions/snackbarActions";
 import { connect } from "react-redux";
+import { Container, Paper, Typography } from "@mui/material";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -50,16 +52,41 @@ const Upload = ({ setSnackbar }) => {
     });
     setProgress(100);
     setProgress(0);
-    setSnackbar(true, "Video uploaded successfully", "success");
+    const uploadtodb_data = await uploadToDB({
+      VideoID: videoID,
+      token: localStorage.getItem("token"),
+    });
+    if (uploadtodb_data?.statusCode === 200) {
+      setSnackbar(true, "Video uploaded successfully", "success");
+    } else {
+      setSnackbar(true, "Failed to upload video", "error");
+    }
   };
 
   return (
-    <div className="upload">
-      <div className="upload__container">
+    <Container
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "calc(100vh - 64px)",
+      }}
+    >
+      <Paper
+        sx={{
+          padding: {
+            xs: 5,
+            sm: 7,
+            md: 10,
+            lg: 10,
+            xl: 10,
+          },
+          textAlign: "center",
+        }}
+        elevation={3}
+      >
         <UploadIcon
           sx={{
-            fontSize: "100px",
-            color: "white",
             border: "0.2px solid #cfd3da",
             borderRadius: "100%",
             height: "200px",
@@ -67,17 +94,19 @@ const Upload = ({ setSnackbar }) => {
             padding: "10px",
           }}
         />
-        <h2>Upload Video</h2>
+        <Typography
+          variant="h4"
+          sx={{
+            margin: "20px 0",
+          }}
+        >
+          Upload Video
+        </Typography>
         <Button
           component="label"
           role={undefined}
           variant="contained"
           tabIndex={-1}
-          sx={
-            {
-              // borderRadius: "100%",
-            }
-          }
           startIcon={<CloudUploadIcon />}
         >
           Upload file
@@ -99,8 +128,8 @@ const Upload = ({ setSnackbar }) => {
             }}
           />
         )}
-      </div>
-    </div>
+      </Paper>
+    </Container>
   );
 };
 

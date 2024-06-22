@@ -1,5 +1,8 @@
 import React from "react";
-import Box from "@mui/material/Box";
+import { useLocation } from "react-router-dom";
+
+import { Box, styled } from "@mui/material";
+
 import Drawer from "@mui/material/Drawer";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
@@ -8,12 +11,39 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 
-const drawerWidth = 240;
+// icons
+import LightModeIcon from "@mui/icons-material/LightMode";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import HomeIcon from "@mui/icons-material/Home";
+import UploadIcon from "@mui/icons-material/Upload";
+import VideoLibraryIcon from "@mui/icons-material/VideoLibrary";
+import CollectionsIcon from "@mui/icons-material/Collections";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { Typography } from "@mui/material";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
-const MuiSidebar = () => {
+import { logout } from "../../utils/logout";
+import { useNavigate } from "react-router-dom";
+
+const drawerWidth = 220;
+
+const MuiSidebar = ({ theme, setTheme }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const CustomListItem = styled(ListItem)({
+    width: "95%",
+    margin: "5px",
+    borderRadius: "10px",
+    "&:hover": {
+      borderRadius: "10px",
+      backgroundColor: (theme) => theme.palette.primary.light,
+    },
+  });
+
+  // upload backdrop
+
   return (
     <Drawer
       variant="permanent"
@@ -26,29 +56,93 @@ const MuiSidebar = () => {
       <Toolbar />
       <Box sx={{ overflow: "auto" }}>
         <List>
-          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
+          {["Home", "Upload", "Saved Videos", "Your Videos", "Profile"].map(
+            (text, index) => (
+              <CustomListItem
+                key={text}
+                disablePadding
+                sx={{
+                  backgroundColor:
+                    location.pathname === "/" && index === 0
+                      ? (theme) => theme.palette.primary.main
+                      : location.pathname === "/upload" && index === 1
+                      ? (theme) => theme.palette.primary.main
+                      : location.pathname === "/saved" && index === 2
+                      ? (theme) => theme.palette.primary.main
+                      : location.pathname === "/yourvideos" && index === 3
+                      ? (theme) => theme.palette.primary.main
+                      : location.pathname === "/profile" && index === 4
+                      ? (theme) => theme.palette.primary.main
+                      : "transparent",
+                  "&:hover": {
+                    borderRadius: "10px",
+                    backgroundColor: (theme) => theme.palette.primary.light,
+                  },
+                }}
+              >
+                <ListItemButton
+                  onClick={() => {
+                    if (index === 0) {
+                      navigate("/");
+                    } else if (index === 1) {
+                      navigate("/upload");
+                    } else if (index === 2) {
+                      navigate("/saved");
+                    } else if (index === 3) {
+                      navigate("/yourvideos");
+                    } else if (index === 4) {
+                      navigate("/profile");
+                    }
+                  }}
+                >
+                  <ListItemIcon>
+                    {index === 0 && <HomeIcon fontSize="large" />}
+                    {index === 1 && <UploadIcon fontSize="large" />}
+                    {index === 2 && <VideoLibraryIcon fontSize="large" />}
+                    {index === 3 && <CollectionsIcon fontSize="large" />}
+                    {index === 4 && <AccountCircleIcon fontSize="large" />}
+                  </ListItemIcon>
+                  <ListItemText primary={text} />
+                </ListItemButton>
+              </CustomListItem>
+            )
+          )}
         </List>
         <Divider />
         <List>
-          {["All mail", "Trash", "Spam"].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
+          <Typography variant="h6" style={{ marginLeft: "10px" }}>
+            Subscriptions
+          </Typography>
+        </List>
+        <Divider />
+        <List>
+          {theme ? (
+            <CustomListItem disablePadding>
+              <ListItemButton onClick={() => setTheme(false)}>
                 <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  <DarkModeIcon fontSize="large" />
                 </ListItemIcon>
-                <ListItemText primary={text} />
+                <ListItemText primary="Dark Mode" />
               </ListItemButton>
-            </ListItem>
-          ))}
+            </CustomListItem>
+          ) : (
+            <CustomListItem disablePadding>
+              <ListItemButton onClick={() => setTheme(true)}>
+                <ListItemIcon>
+                  <LightModeIcon fontSize="large" />
+                </ListItemIcon>
+                <ListItemText primary="Light Mode" />
+              </ListItemButton>
+            </CustomListItem>
+          )}
+          <CustomListItem disablePadding>
+            <ListItemButton onClick={() => logout()}>
+              <ListItemIcon>
+                <LogoutIcon fontSize="large" />
+              </ListItemIcon>
+              <ListItemText primary="Logout" />
+            </ListItemButton>
+          </CustomListItem>
         </List>
       </Box>
     </Drawer>
