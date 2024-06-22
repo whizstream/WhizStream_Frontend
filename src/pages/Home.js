@@ -17,6 +17,8 @@ import Profile from "../components/profile/Profile";
 import Saved from "../components/video/Saved";
 import { Box, Stack } from "@mui/material";
 import MuiSidebar from "../components/sidebar/MuiSidebar";
+import Video from "../components/video/Video";
+import PageNotFound from "../components/404/PageNotFound";
 
 const Home = ({ login, userDetails, theme, setTheme }) => {
   const navigate = useNavigate();
@@ -52,6 +54,12 @@ const Home = ({ login, userDetails, theme, setTheme }) => {
             <Route path="/yourvideos" element={<YourVideos />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/saved" element={<Saved />} />
+            <Route path="/video/:id" element={<Video />} />
+            {/* 404 */}
+            <Route
+              path="*"
+              element={<PageNotFound />}
+            />
           </Routes>
         </Box>
       </Stack>

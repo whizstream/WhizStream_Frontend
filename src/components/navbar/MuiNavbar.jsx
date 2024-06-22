@@ -14,6 +14,10 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import PlayCircleFilledIcon from "@mui/icons-material/PlayCircleFilled";
+import Tooltip from "@mui/material/Tooltip";
+
+import { connect } from "react-redux";
+import { Button } from "@mui/material";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -55,7 +59,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function MuiNavbar() {
+const MuiNavbar = ({ auth }) => {
+  const [username, setUsername] = React.useState("");
   const [notificationsCount, setNotificationsCount] = React.useState(10);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -115,6 +120,10 @@ export default function MuiNavbar() {
     </Menu>
   );
 
+  React.useEffect(() => {
+    setUsername(auth.userDetails?.username);
+  }, [auth]);
+
   return (
     <Box sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
       <AppBar position="static">
@@ -160,16 +169,18 @@ export default function MuiNavbar() {
                 <NotificationsIcon />
               </Badge>
             </IconButton>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
+            <Tooltip title={<h1>{username}</h1>} arrow>
+              <IconButton
+                size="large"
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+            </Tooltip>
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -188,4 +199,12 @@ export default function MuiNavbar() {
       {renderMobileMenu}
     </Box>
   );
-}
+};
+
+const mapStateToProps = (auth) => {
+  return {
+    ...auth,
+  };
+};
+
+export default connect(mapStateToProps)(MuiNavbar);

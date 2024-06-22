@@ -11,12 +11,19 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Google from "./pages/Google";
 
 const App = () => {
-  const [theme, setTheme] = useState(true);
+  const [theme, setTheme] = useState(() => {
+    const storedTheme = localStorage.getItem("theme");
+    return storedTheme === "false" ? false : true;
+  });
   const darkTheme = createTheme({
     palette: {
       mode: theme ? "light" : "dark",
     },
   });
+
+  React.useEffect(() => {
+    localStorage.setItem("theme", theme.toString());
+  }, [theme]);
 
   return (
     <ThemeProvider theme={darkTheme}>
