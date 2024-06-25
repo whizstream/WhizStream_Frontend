@@ -1,4 +1,4 @@
 // const URL = "http://localhost:3001";
-// const URL = "http://10.16.21.46:3001";
-const URL = "http://15.222.2.109:3001"
+const URL = "https://9jeknh6q8j.execute-api.ca-central-1.amazonaws.com";
+
 export default URL;
