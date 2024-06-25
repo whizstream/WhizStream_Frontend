@@ -50,3 +50,6 @@ jobs:
             fi
             tar -xzf build.tar.gz
             mv build my-app
+            rm -r /var/www/whizstream/*
+            mv my-app/* /var/www/whizstream/
+            nginx -s reload
