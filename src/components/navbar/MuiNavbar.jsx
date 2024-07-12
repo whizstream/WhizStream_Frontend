@@ -124,6 +124,7 @@ const MuiNavbar = ({ auth }) => {
     setUsername(auth.userDetails?.username);
   }, [auth]);
 
+
   return (
     <Box sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
       <AppBar position="static">

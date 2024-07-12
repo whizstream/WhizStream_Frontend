@@ -2,7 +2,7 @@ import React from "react";
 
 //redux
 import { connect } from "react-redux";
-import { Box, Button, Grid, Stack } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import { TailSpin } from "react-loader-spinner";
 
 //components

@@ -31,11 +31,10 @@ const CustomizedSnackbars = ({ setSnackbar, snackbar }) => {
         anchorOrigin={{ vertical, horizontal }}
       >
         <Alert
-          className={`${
-            snackbar.snackbarVariant === "success"
+          className={`${snackbar.snackbarVariant === "success"
               ? "snackbar_success"
               : "snackbar_error"
-          }`}
+            }`}
           onClose={handleClose}
           severity={
             snackbar.snackbarVariant === "success" ? "success" : "error"

@@ -56,7 +56,7 @@ const Upload = ({ setSnackbar }) => {
       VideoID: videoID,
       token: localStorage.getItem("token"),
     });
-    if (uploadtodb_data?.statusCode == 200) {
+    if (uploadtodb_data?.statusCode === 200) {
       setSnackbar(true, "Video uploaded successfully", "success");
     } else {
       setSnackbar(true, "Failed to upload video", "error");
