@@ -24,7 +24,6 @@ const App = () => {
         <Routes>
           <Route path="/auth" element={<Auth />} />
           <Route path="/google" element={<Google />} />
-
           <Route
             path="/*"
             element={<Home theme={theme} setTheme={setTheme} />}
