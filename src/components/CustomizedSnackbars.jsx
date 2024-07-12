@@ -11,7 +11,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-const CustomizedSnackbars = ({ setSnackbar, snackbar }, props) => {
+const CustomizedSnackbars = ({ setSnackbar, snackbar }) => {
   // const { vertical, horizontal, open } = state;
   const vertical = "bottom";
   const horizontal = "left";

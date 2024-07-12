@@ -6,7 +6,7 @@ import { Box, Grid } from "@mui/material";
 import { TailSpin } from "react-loader-spinner";
 
 //components
-import Video from "../video/Video";
+import Video from "../video/VideoBox";
 
 // apis
 import { getVideos } from "../../apis/video/getVideos";
@@ -52,7 +52,7 @@ const Dashboard = () => {
           />
         </Box>
       ) : (
-        <Grid container spacing={2}>
+        <Grid container spacing={3}>
           {videos?.map((video, index) => (
             <Video key={index} video={video} />
           ))}
