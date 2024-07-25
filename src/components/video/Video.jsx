@@ -5,24 +5,30 @@ import VideoPlayer from "./VideoPlayer";
 import VideoDescription from "./VideoDescription";
 import VideoComments from "./VideoComments";
 import { getPreSignedURL } from "../../apis/video/playVideo.js";
+import { useNavigate } from "react-router";
 
 const Video = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
+
   const data = {
     videoId: id,
   };
 
   const getURL = async () => {
     const response = await getPreSignedURL(data);
-    console.log(response);
-    return response;
+    if (response.status === 200) {
+      setUrl(response.data.url);
+    } else {
+      navigate("/");
+    }
   };
 
   React.useEffect(() => {
     getURL();
   }, [id]);
 
-  const url = "";
+  const [url, setUrl] = React.useState("");
 
   return (
     <Box

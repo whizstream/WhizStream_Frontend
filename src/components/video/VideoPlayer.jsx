@@ -10,12 +10,10 @@ const VideoPlayer = ({ url }) => {
         height="100%"
         width="100%"
         controls={true}
+        playing={true}
         config={{
           attributes: {
             controlsList: "nodownload",
-          },
-          playerVars: {
-            autoplay: 0,
           },
         }}
       />

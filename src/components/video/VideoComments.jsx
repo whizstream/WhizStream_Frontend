@@ -24,84 +24,29 @@ const VideoComments = () => {
       comment: "I love this video!",
     },
     {
-      id: 1,
+      id: 5,
       user: "araval",
       comment: "This is a great video!",
     },
     {
-      id: 2,
+      id: 6,
       user: "johndoe",
       comment: "I love this video!",
     },
     {
-      id: 3,
+      id: 7,
       user: "janedoe",
       comment: "This video is awesome!",
     },
     {
-      id: 4,
+      id: 8,
       user: "johndoe",
       comment: "I love this video!",
     },
     {
-      id: 1,
+      id: 9,
       user: "araval",
       comment: "This is a great video!",
-    },
-    {
-      id: 2,
-      user: "johndoe",
-      comment: "I love this video!",
-    },
-    {
-      id: 3,
-      user: "janedoe",
-      comment: "This video is awesome!",
-    },
-    {
-      id: 4,
-      user: "johndoe",
-      comment: "I love this video!",
-    },
-    {
-      id: 1,
-      user: "araval",
-      comment: "This is a great video!",
-    },
-    {
-      id: 2,
-      user: "johndoe",
-      comment: "I love this video!",
-    },
-    {
-      id: 3,
-      user: "janedoe",
-      comment: "This video is awesome!",
-    },
-    {
-      id: 4,
-      user: "johndoe",
-      comment: "I love this video!",
-    },
-    {
-      id: 1,
-      user: "araval",
-      comment: "This is a great video!",
-    },
-    {
-      id: 2,
-      user: "johndoe",
-      comment: "I love this video!",
-    },
-    {
-      id: 3,
-      user: "janedoe",
-      comment: "This video is awesome!",
-    },
-    {
-      id: 4,
-      user: "johndoe",
-      comment: "I love this video!",
     },
   ];
   return (
