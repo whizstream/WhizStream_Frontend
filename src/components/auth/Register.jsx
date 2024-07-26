@@ -5,14 +5,33 @@ import Button from "@mui/material/Button";
 
 import URL from "../../apis/url";
 
+//redux
+import { connect } from "react-redux";
+import { getSnackbarActions } from "../../store/actions/snackbarActions";
+
 // utils
 import googleBtn from "../../assets/btn_google.png";
 import { Stack, Typography } from "@mui/material";
+import { authRegister } from "../../apis/auth/authRegister";
 
-const Register = ({ setLogin }) => {
+const Register = ({ setLogin, setSnackbar }) => {
   const [email, setEmail] = React.useState();
   const [password, setPassword] = React.useState();
   const [username, setUsername] = React.useState();
+
+  const registerHandler = async () => {
+    let res = null;
+    if (email && password) {
+      res = await authRegister(email, password, username);
+    }
+    if (res?.statusCode === 200) {
+      setSnackbar(true, "Registered Successfull", "success");
+      setLogin(true);
+    } else {
+      let message = res?.message || "Something went wrong";
+      setSnackbar(true, message, "error");
+    }
+  };
 
   const login = () => {
     setLogin(true);
@@ -56,7 +75,9 @@ const Register = ({ setLogin }) => {
         value={password}
         setValue={setPassword}
       />
-      <Button variant="contained">Register</Button>
+      <Button variant="contained" onClick={registerHandler}>
+        Register
+      </Button>
       <Button className="btn-auth" type="button" onClick={googleAuth}>
         <img className="btn-auth-img" src={googleBtn} alt="google sign in" />
       </Button>
@@ -65,4 +86,10 @@ const Register = ({ setLogin }) => {
   );
 };
 
-export default Register;
+const mapActionsToProps = (dispatch) => {
+  return {
+    ...getSnackbarActions(dispatch),
+  };
+};
+
+export default connect(null, mapActionsToProps)(Register);
