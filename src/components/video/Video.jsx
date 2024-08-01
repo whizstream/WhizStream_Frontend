@@ -10,25 +10,23 @@ import { useNavigate } from "react-router";
 const Video = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-
-  const data = {
-    videoId: id,
-  };
-
-  const getURL = async () => {
-    const response = await getPreSignedURL(data);
-    if (response.status === 200) {
-      setUrl(response.data.url);
-    } else {
-      navigate("/");
-    }
-  };
-
-  React.useEffect(() => {
-    getURL();
-  }, [id, getURL]);
-
   const [url, setUrl] = React.useState("");
+  React.useEffect(() => {
+    const data = {
+      videoId: id,
+    };
+
+    const getURL = async () => {
+      const response = await getPreSignedURL(data);
+      if (response.status === 200) {
+        setUrl(response.data.url);
+      } else {
+        navigate("/");
+      }
+    };
+
+    getURL();
+  }, [id, navigate, setUrl]);
 
   return (
     <Box
