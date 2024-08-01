@@ -1,9 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { Box, Stack } from "@mui/material";
+import { Button, Box, Stack } from "@mui/material";
 import VideoPlayer from "./VideoPlayer";
-import VideoDescription from "./VideoDescription";
-import VideoComments from "./VideoComments";
 import { getPreSignedURL } from "../../apis/video/playVideo.js";
 import { useNavigate } from "react-router";
 
@@ -30,18 +28,28 @@ const Video = () => {
 
   return (
     <Box
-      padding={2}
+      padding={5}
       sx={{
         width: "100%",
         height: "100%",
-        display: "flex",
       }}
     >
-      <Stack width="75%">
-        <VideoPlayer url={url} />
-        <VideoDescription />
-      </Stack>
-      <VideoComments />
+      <VideoPlayer url={url} />
+
+      <Button
+        variant="contained"
+        color="primary"
+        sx={{
+          marginTop: 2,
+          marginRight: "auto",
+          marginBottom: 2,
+          padding: 2,
+          borderRadius: 5,
+          backgroundColor: "blue",
+        }}
+      >
+        Edit Title
+      </Button>
     </Box>
   );
 };

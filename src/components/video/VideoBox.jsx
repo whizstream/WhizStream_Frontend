@@ -33,8 +33,6 @@ const Video = ({ video }) => {
       }}
       sx={{
         cursor: "pointer",
-        //padding: "10px",
-        //margin: "10px",
       }}
     >
       <Stack>
