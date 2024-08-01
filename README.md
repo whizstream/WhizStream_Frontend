@@ -18,7 +18,6 @@ docker run -it -d -p 3000:3000 -v $(pwd):/app react-app-dev
 
 ### Production
 
-- Run this command to create a image
 
 ```sh
 docker build -t react-app-prod -f Dockerfile.prod .

@@ -49,6 +49,7 @@ jobs:
             if [ -d my-app ]; then
               rm -rf my-app
             fi
+            sudo su
             tar -xzf build.tar.gz
             mv build my-app
             rm -r /var/www/whizstream/*
