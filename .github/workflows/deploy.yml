@@ -45,13 +45,11 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           port: 22
           script: |
-            sudo su
             if [ -d my-app ]; then
               rm -rf my-app
             fi
-            sudo su
             tar -xzf build.tar.gz
             mv build my-app
-            rm -r /var/www/whizstream/*
-            mv my-app/* /var/www/whizstream/
-            nginx -s reload
+            sudo rm -r /var/www/whizstream/*
+            sudo mv my-app/* /var/www/whizstream/
+            sudo nginx -s reload
