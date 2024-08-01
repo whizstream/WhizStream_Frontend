@@ -26,7 +26,7 @@ const Video = () => {
 
   React.useEffect(() => {
     getURL();
-  }, [id]);
+  }, [id, getURL]);
 
   const [url, setUrl] = React.useState("");
 
