@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { Button, Box, Stack } from "@mui/material";
+import { Button, Box } from "@mui/material";
 import VideoPlayer from "./VideoPlayer";
 import { getPreSignedURL } from "../../apis/video/playVideo.js";
 import { useNavigate } from "react-router";
