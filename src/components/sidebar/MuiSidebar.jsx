@@ -17,7 +17,6 @@ import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import HomeIcon from "@mui/icons-material/Home";
 import UploadIcon from "@mui/icons-material/Upload";
-import VideoLibraryIcon from "@mui/icons-material/VideoLibrary";
 import CollectionsIcon from "@mui/icons-material/Collections";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { Typography } from "@mui/material";
@@ -56,57 +55,50 @@ const MuiSidebar = ({ theme, setTheme }) => {
       <Toolbar />
       <Box sx={{ overflow: "auto" }}>
         <List>
-          {["Home", "Upload", "Saved Videos", "Your Videos", "Profile"].map(
-            (text, index) => (
-              <CustomListItem
-                key={text}
-                disablePadding
-                sx={{
-                  backgroundColor:
-                    location.pathname === "/" && index === 0
-                      ? (theme) => theme.palette.primary.main
-                      : location.pathname === "/upload" && index === 1
-                      ? (theme) => theme.palette.primary.main
-                      : location.pathname === "/saved" && index === 2
-                      ? (theme) => theme.palette.primary.main
-                      : location.pathname === "/yourvideos" && index === 3
-                      ? (theme) => theme.palette.primary.main
-                      : location.pathname === "/profile" && index === 4
-                      ? (theme) => theme.palette.primary.main
-                      : "transparent",
-                  "&:hover": {
-                    borderRadius: "10px",
-                    backgroundColor: (theme) => theme.palette.primary.light,
-                  },
+          {["Home", "Upload", "Your Videos", "Profile"].map((text, index) => (
+            <CustomListItem
+              key={text}
+              disablePadding
+              sx={{
+                backgroundColor:
+                  location.pathname === "/" && index === 0
+                    ? (theme) => theme.palette.primary.main
+                    : location.pathname === "/upload" && index === 1
+                    ? (theme) => theme.palette.primary.main
+                    : location.pathname === "/yourvideos" && index === 2
+                    ? (theme) => theme.palette.primary.main
+                    : location.pathname === "/profile" && index === 3
+                    ? (theme) => theme.palette.primary.main
+                    : "transparent",
+                "&:hover": {
+                  borderRadius: "10px",
+                  backgroundColor: (theme) => theme.palette.primary.light,
+                },
+              }}
+            >
+              <ListItemButton
+                onClick={() => {
+                  if (index === 0) {
+                    navigate("/");
+                  } else if (index === 1) {
+                    navigate("/upload");
+                  } else if (index === 2) {
+                    navigate("/yourvideos");
+                  } else if (index === 3) {
+                    navigate("/profile");
+                  }
                 }}
               >
-                <ListItemButton
-                  onClick={() => {
-                    if (index === 0) {
-                      navigate("/");
-                    } else if (index === 1) {
-                      navigate("/upload");
-                    } else if (index === 2) {
-                      navigate("/saved");
-                    } else if (index === 3) {
-                      navigate("/yourvideos");
-                    } else if (index === 4) {
-                      navigate("/profile");
-                    }
-                  }}
-                >
-                  <ListItemIcon>
-                    {index === 0 && <HomeIcon fontSize="large" />}
-                    {index === 1 && <UploadIcon fontSize="large" />}
-                    {index === 2 && <VideoLibraryIcon fontSize="large" />}
-                    {index === 3 && <CollectionsIcon fontSize="large" />}
-                    {index === 4 && <AccountCircleIcon fontSize="large" />}
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItemButton>
-              </CustomListItem>
-            )
-          )}
+                <ListItemIcon>
+                  {index === 0 && <HomeIcon fontSize="large" />}
+                  {index === 1 && <UploadIcon fontSize="large" />}
+                  {index === 2 && <CollectionsIcon fontSize="large" />}
+                  {index === 3 && <AccountCircleIcon fontSize="large" />}
+                </ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItemButton>
+            </CustomListItem>
+          ))}
         </List>
         <Divider />
         <List>
