@@ -7,7 +7,7 @@ import Register from "../components/auth/Register";
 import { Box, styled } from "@mui/material";
 
 // bg
-import bg from "../assets/bg.jpg"
+import bg from "../assets/ym_bg.png"
 
 //components
 
@@ -39,7 +39,7 @@ const Auth = () => {
       <Box sx={{
         border: "1px solid black",
         borderRadius: "10px",
-        backgroundColor: "rgba(255,255,255, 0.8)",
+        backgroundColor: "rgba(255,255,255, 0.5)",
         boxShadow: "0 0 10px 0 black",
       }}>
         {login ? (
