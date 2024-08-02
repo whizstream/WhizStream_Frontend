@@ -17,7 +17,6 @@ import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import HomeIcon from "@mui/icons-material/Home";
 import UploadIcon from "@mui/icons-material/Upload";
-import VideoLibraryIcon from "@mui/icons-material/VideoLibrary";
 import CollectionsIcon from "@mui/icons-material/Collections";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { Typography } from "@mui/material";
