@@ -4,6 +4,7 @@ import { styled } from "@mui/material/styles";
 
 //mui
 import Button from "@mui/material/Button";
+
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import UploadIcon from "@mui/icons-material/Upload";
 import LinearProgress from "@mui/material/LinearProgress";
@@ -15,7 +16,7 @@ import { uploadToDB } from "../../apis/video/uploadToDB";
 //redux
 import { getSnackbarActions } from "../../store/actions/snackbarActions";
 import { connect } from "react-redux";
-import { Container, Paper, Typography } from "@mui/material";
+import { Container, Paper, Typography, Box, Stack } from "@mui/material";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -82,52 +83,71 @@ const Upload = ({ setSnackbar }) => {
             xl: 10,
           },
           textAlign: "center",
+          width: "50%",
+          borderRadius: "20px",
         }}
         elevation={3}
       >
-        <UploadIcon
+        <Stack
           sx={{
-            border: "0.2px solid #cfd3da",
-            borderRadius: "100%",
-            height: "200px",
-            width: "200px",
-            padding: "10px",
-          }}
-        />
-        <Typography
-          variant="h4"
-          sx={{
-            margin: "20px 0",
+            display: "flex",
+            flexDirection: "row",
+            gap: "20px",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
-          Upload Video
-        </Typography>
-        <Button
-          component="label"
-          role={undefined}
-          variant="contained"
-          tabIndex={-1}
-          startIcon={<CloudUploadIcon />}
-        >
-          Upload file
-          <VisuallyHiddenInput
-            type="file"
-            accept="video/mp4"
-            onClick={setPresignedUrl}
-            onChange={handleFileChange}
-          />
-        </Button>
+          <Box>
+            <UploadIcon
+              sx={{
+                border: "0.2px solid #cfd3da",
+                borderRadius: "100%",
+                height: "200px",
+                width: "200px",
+                padding: "10px",
+              }}
+            />
+          </Box>
+          <Box>
+            <Typography
+              variant="h4"
+              sx={{
+                margin: "20px 0",
+              }}
+            >
+              Upload Video
+            </Typography>
+            <Button
+              component="label"
+              role={undefined}
+              variant="contained"
+              tabIndex={-1}
+              startIcon={<CloudUploadIcon />}
+            >
+              Upload file
+              <VisuallyHiddenInput
+                type="file"
+                accept="video/mp4"
+                onClick={setPresignedUrl}
+                onChange={handleFileChange}
+              />
+            </Button>
 
-        {progress > 0 && (
-          <LinearProgress
-            variant="determinate"
-            value={progress}
-            sx={{
-              width: "50%",
-              margin: "20px auto",
-            }}
-          />
-        )}
+            {progress > 0 && (
+              <>
+                <LinearProgress
+                  variant="determinate"
+                  value={progress}
+                  sx={{
+                    width: "50%",
+                    margin: "20px auto",
+                  }}
+                />
+                <Typography variant="h6">{progress}%</Typography>
+              </>
+            )}
+          </Box>
+        </Stack>
       </Paper>
     </Container>
   );

@@ -28,6 +28,7 @@ const Dashboard = () => {
       sx={{
         width: "100%",
         height: "100%",
+        overflow: "auto",
       }}
     >
       {loader ? (
@@ -53,9 +54,9 @@ const Dashboard = () => {
         </Box>
       ) : (
         <Grid container spacing={3}>
-          {videos?.map((video, index) => (
-            <Video key={index} video={video} />
-          ))}
+          {videos
+            ?.map((video, index) => <Video key={index} video={video} />)
+            .reverse()}
         </Grid>
       )}
     </Box>
