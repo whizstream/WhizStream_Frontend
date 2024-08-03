@@ -102,12 +102,6 @@ const MuiSidebar = ({ theme, setTheme }) => {
         </List>
         <Divider />
         <List>
-          <Typography variant="h6" style={{ marginLeft: "10px" }}>
-            Subscriptions
-          </Typography>
-        </List>
-        <Divider />
-        <List>
           {theme ? (
             <CustomListItem disablePadding>
               <ListItemButton onClick={() => setTheme(false)}>

@@ -20,7 +20,8 @@ const Video = ({ video }) => {
   } else {
     timeAgo = `${minutesDifference} minutes ago`;
   }
-
+  const video_url = `https://ws-streaming-thumbnail-bucket.s3.ca-central-1.amazonaws.com/${video.VideoID}.jpeg`;
+  console.log(video);
   return (
     <Grid
       item
@@ -37,11 +38,14 @@ const Video = ({ video }) => {
     >
       <Stack>
         <img
-          src="https://picsum.photos/300/200"
+          src={
+            video.Processing === false
+              ? video_url
+              : "https://ws-streaming-thumbnail-bucket.s3.ca-central-1.amazonaws.com/ym_processing.png"
+          }
           alt="video"
-          style={{ borderRadius: "10px" }}
+          style={{ borderRadius: "10px", width: "300px", height: "200px" }}
         />
-        <Typography variant="h6">{video?.Title}</Typography>
         <Typography variant="subtitle2">@{video?.User?.username}</Typography>
         <Typography variant="subtitle2">{timeAgo}</Typography>
       </Stack>
